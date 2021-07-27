@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import styled from '@emotion/styled';
+import { obtenerDiferenciaYear, calcularMarca, obtenerPlan } from '../helper';
 
 
 const Campo = styled.div`
@@ -75,6 +76,22 @@ const Form = () => {
             return;
         }
         setError(false)
+
+        let resultado = 2000;
+
+        // obtener diferencia de años
+        const diferencia = obtenerDiferenciaYear(year)
+
+        // x año restar 3 %
+        resultado -= ((diferencia * 3 ) * resultado) / 100
+
+        // incremento segun modelo
+        resultado = calcularMarca(marca) * resultado
+        // basico 20% + / completo 50% +
+        const incrementoPlan = obtenerPlan(plan)
+        resultado = parseFloat(incrementoPlan * resultado).toFixed(2)
+        console.log(resultado)
+        // calculo del total
     }
 
     return (

@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import { obtenerDiferenciaYear, calcularMarca, obtenerPlan } from '../helper';
 
 
@@ -50,7 +51,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `
 
-const Form = ( {setResumen} ) => {
+const Form = ( {setResumen, setCargando} ) => {
 
     const [data, setData] = useState({
         marca:'',
@@ -90,12 +91,21 @@ const Form = ( {setResumen} ) => {
         // basico 20% + / completo 50% +
         const incrementoPlan = obtenerPlan(plan)
         resultado = parseFloat(incrementoPlan * resultado).toFixed(2)
-        console.log(resultado)
-        // calculo del total
-        setResumen({
-            cotizacion: resultado,
-            data
-        })
+       
+        //carga el spinner
+        setCargando(true)
+       
+        setTimeout(() => {
+            //elimina spinner
+            setCargando(false)
+            //Pasa total al componente ppal
+            setResumen({
+                cotizacion: Number(resultado),
+                data
+            })
+
+        }, 2000);
+        
     }
 
     return (
@@ -163,4 +173,8 @@ const Form = ( {setResumen} ) => {
     )
 }
 
+Form.propTypes = {
+    setResumen: PropTypes.func.isRequired,
+    setCargando:PropTypes.func.isRequired,
+}
 export default Form

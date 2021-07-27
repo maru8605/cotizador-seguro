@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Form from './components/Form';
 import Resumen from './components/Resumen';
 import Result from './components/Result';
+import Spinner from './components/Spinner';
 
 const Container = styled.div`
   max-width: 700px;
@@ -25,7 +26,8 @@ function App() {
     }
 
   })
-  
+  const [cargando, setCargando] = useState(false)
+
   const {cotizacion, data} = resumen;
   return (
     <Container>
@@ -35,14 +37,20 @@ function App() {
 
       <FormContainer>
         <Form
-        setResumen={setResumen}/>
+        setResumen={setResumen}
+        setCargando={setCargando}/>
+        
+        { cargando ?   <Spinner/> : null}
 
         <Resumen
           data={data}
         />
+
+        {!cargando ?
         <Result
-          cotizacion={cotizacion}
-        />
+        cotizacion={cotizacion}/> 
+       : null }
+        
       </FormContainer>
     </Container>
   );

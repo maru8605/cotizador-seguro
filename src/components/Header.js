@@ -4,7 +4,7 @@ const HeaderContainer = styled.header`
    background-color: #f603b9;
    padding: 10px;
    font-weight: bold;
-   color: ffffff;
+   color: #ffffff;
 `
 const HeaderText = styled.h1`
     font-size: 2rem;

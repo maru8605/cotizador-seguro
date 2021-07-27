@@ -50,7 +50,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `
 
-const Form = () => {
+const Form = ( {setResumen} ) => {
 
     const [data, setData] = useState({
         marca:'',
@@ -86,12 +86,16 @@ const Form = () => {
         resultado -= ((diferencia * 3 ) * resultado) / 100
 
         // incremento segun modelo
-        resultado = calcularMarca(marca) * resultado
+        resultado = calcularMarca(marca) * resultado;
         // basico 20% + / completo 50% +
         const incrementoPlan = obtenerPlan(plan)
         resultado = parseFloat(incrementoPlan * resultado).toFixed(2)
         console.log(resultado)
         // calculo del total
+        setResumen({
+            cotizacion: resultado,
+            data
+        })
     }
 
     return (

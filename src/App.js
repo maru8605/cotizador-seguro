@@ -1,6 +1,9 @@
+import {useState} from 'react'
 import styled from '@emotion/styled';
 import Header from "./components/Header";
 import Form from './components/Form';
+import Resumen from './components/Resumen';
+import Result from './components/Result';
 
 const Container = styled.div`
   max-width: 700px;
@@ -12,6 +15,18 @@ const FormContainer = styled.div`
 `
 
 function App() {
+  const [resumen, setResumen] = useState({
+    cotizacion: 0,
+    data : {
+      marca :'',
+      year: '',
+      plan: ''
+
+    }
+
+  })
+  
+  const {cotizacion, data} = resumen;
   return (
     <Container>
       <Header
@@ -19,7 +34,15 @@ function App() {
       />
 
       <FormContainer>
-        <Form/>
+        <Form
+        setResumen={setResumen}/>
+
+        <Resumen
+          data={data}
+        />
+        <Result
+          cotizacion={cotizacion}
+        />
       </FormContainer>
     </Container>
   );

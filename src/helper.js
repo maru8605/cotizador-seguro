@@ -28,3 +28,8 @@ export function calcularMarca (marca){
 export function obtenerPlan(plan){
     return (plan === 'basico') ? 1.2 : 1.5
 }
+
+// primer letra mayuscula
+export function primerMayuscula(texto){
+    return texto.charAt(0).toUpperCase() + texto.slice(1)
+}
